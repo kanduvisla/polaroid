@@ -58,6 +58,21 @@ class Basic {
         $draw->setFontSize(140);
         $draw->setGravity(Imagick::GRAVITY_SOUTH);
 
+        // Split message if needed:
+        $fullWidth = strlen($message);
+        if(strlen($message) > 64) {
+            $words = explode(' ', $message);
+            $message = '';
+            while(strlen($message) < $fullWidth / 2) {
+                $message .= array_shift($words) . ' ';
+            }
+            $message = trim($message) . PHP_EOL;
+            foreach ($words as $word) {
+                $message .= $word . ' ';
+            }
+            $message = trim($message);
+        }
+
         $textSize = $output->queryFontMetrics($draw, $message);
 
         // Sanity check for textsize:
