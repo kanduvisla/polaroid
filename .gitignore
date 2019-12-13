@@ -1,3 +1,5 @@
 *.jpg
+*.csv
 composer.lock
 vendor/
+output/
