@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+use Kanduvisla\Polaroid\Command\Create;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+$application->setName('Polaroid Tool');
+$application->addCommands([
+    new Create()
+]);
+
+$application->run();

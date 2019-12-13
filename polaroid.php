@@ -33,11 +33,11 @@ function create(string $file, string $message):string{
         $offsetY = ($h - $size)/2;
     }
 
-    $im->resizeImage($w, $h, \Imagick::FILTER_POINT, 1);
+    $im->resizeImage($w, $h, Imagick::FILTER_POINT, 1);
 
     $output->compositeImage($im, Imagick::COMPOSITE_COPY, $offset - $offsetX, $offset - $offsetY);
     $output->compositeImage($wm, Imagick::COMPOSITE_OVER, 0, 0);
-    
+
     // Add text:
     $draw = new ImagickDraw();
     $pixel = new ImagickPixel('gray');
@@ -47,7 +47,7 @@ function create(string $file, string $message):string{
     $draw->setGravity(Imagick::GRAVITY_SOUTH);
 
     $textSize = $output->queryFontMetrics($draw, $message);
-    
+
     // Sanity check for textsize:
     if ($textSize['textWidth'] > $size) {
         $draw->setFontsize(140 * ($size / $textSize['textWidth']));
@@ -66,4 +66,4 @@ function create(string $file, string $message):string{
     return $newFilename;
 }
 
-create('IMG_20191004_164318.jpg', "Zo vader zo dochter :-)" );
+ //create('IMG_20191004_164318.jpg', "Zo vader zo dochter :-)" );

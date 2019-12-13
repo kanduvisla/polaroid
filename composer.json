@@ -1,0 +1,21 @@
+{
+    "name": "kanduvisla/polaroid",
+    "description": "A small utility to create polaroid-like picture from ordinary JPG images.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Giel Berkers",
+            "email": "info@gielberkers.com"
+        }
+    ],
+    "bin": ["bin/polaroid"],
+    "require": {
+        "symfony/console": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kanduvisla\\Polaroid\\": "src/"
+        }
+    }
+}
