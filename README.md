@@ -10,6 +10,12 @@ Use the accompanied `Dockerfile` to build the Docker image:
 
 To see it in action, run:
 
-    ... (tbd) ...
+    (tbd)
 
-    
+If you want to spin up a container for development / debugging purpose, run:
+
+    docker run --rm -i
+        -u $(id -u ${USER}):$(id -g ${USER})
+        -w /app
+        -v ${PWD}:/app
+        -t polaroid

@@ -1,0 +1,4 @@
+.git/
+*.jpg
+composer.lock
+vendor/
