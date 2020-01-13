@@ -12,7 +12,7 @@ use ImagickPixel;
  * Basic Polaroid Picture Processor
  */
 class Basic {
-    public function create(string $file, string $message, string $newFilename) {
+    public function create(string $file, string $message, string $newFilename, array $options) {
         $wm = new Imagick(__DIR__ . '/../../resources/polaroid.png');
         $im = new Imagick($file);
         $output = new Imagick();
@@ -29,6 +29,8 @@ class Basic {
         $h = $im->getImageHeight();
         $offsetX = 0;
         $offsetY = 0;
+        // Range from 0 to 2:
+        $offsetO = isset($options['offset']) ? (float)$options['offset'] : 1;
 
         $ratio = $w / $h;
         // if ratio > 1 then the image is landscape
@@ -37,12 +39,12 @@ class Basic {
             $w *= $size/$h;
             $h = $size;
             $offsetY = 0;
-            $offsetX = ($w - $size)/2;
+            $offsetX = $offsetO * (($w - $size)/2);
         } else {
             $h *= $size/$w;
             $w = $size;
             $offsetX = 0;
-            $offsetY = ($h - $size)/2;
+            $offsetY = $offsetO * (($h - $size)/2);
         }
 
         $im->resizeImage((int)$w, (int)$h, Imagick::FILTER_POINT, 1);

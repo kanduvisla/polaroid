@@ -1,4 +1,6 @@
 *.jpg
+*.JPG
+*.jpeg
 *.csv
 composer.lock
 vendor/

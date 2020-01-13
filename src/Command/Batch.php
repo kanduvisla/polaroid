@@ -33,11 +33,31 @@ class Batch extends Command {
                 continue;
             }
             $data = array_combine($headers, $row);
+            $data['message'] = $data['message'] !== '' ?
+                $data['message'] :
+                str_replace(['.jpg', 'jpeg', '.JPG'], '', $data['filename']);
             $outputFile = $outputDir . '/' . $data['filename'];
             $output->writeln(sprintf('%1$s => %2$s', $data['filename'], $outputFile));
-            $basicProcessor->create($data['filename'], $data['message'], $outputFile);
+            $dir = dirname($inputFile);
+            $basicProcessor->create(
+                $dir . '/' . $data['filename'],
+                $data['message'],
+                $outputFile,
+                $this->getOptions($data['options'])
+            );
         }
 
         return 0;
+    }
+
+    private function getOptions(string $options): array
+    {
+        $options = explode(',', $options);
+        $returnValue = [];
+        foreach($options as $option) {
+            $a = explode(':', $option);
+            $returnValue[$a[0]] = $a[1];
+        }
+        return $returnValue;
     }
 }
